@@ -6,24 +6,27 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
-    @StateObject private var viewModel = ContentViewModel()
+   
     var body: some View {
-        
-        ZStack {
-                    // Camera image
-                    FrameView(image: viewModel.frame)
-                        .ignoresSafeArea()
-
-                    // Error banner + camera button overlayed on top
-                    VStack {
-                        ErrorView(error: viewModel.error)
-                        Spacer()
-                        ControlView()
-                    }
+        TabView {
+            CameraView()
+                .tabItem {
+                    Label("Camera", systemImage: "camera")
                 }
+            CheckListScreen()
+                .tabItem {
+                    Label("Чек лист", systemImage: "square.and.pencil")
+                }
+        }
     }
+    
+    
+
+    
+   
 }
 
 #Preview {
