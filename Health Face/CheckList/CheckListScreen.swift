@@ -11,6 +11,7 @@ import SwiftUI
 
 struct CheckListScreen: View {
     @State var text = ""
+    @StateObject var viewModel = CheckListViewModel()
     var body: some View {
         VStack {
             TextField("Сон", text: $text)
@@ -34,7 +35,7 @@ struct CheckListScreen: View {
                                    RoundedRectangle(cornerRadius: 7)
                                     .stroke(.secondary.opacity(0.5), lineWidth: 0.5))
             Button {
-                
+                print("hello")
             } label: {
                 Text("Сохранить запись")
                     .font(.headline)

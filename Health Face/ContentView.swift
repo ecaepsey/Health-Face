@@ -20,6 +20,11 @@ struct ContentView: View {
                 .tabItem {
                     Label("Чек лист", systemImage: "square.and.pencil")
                 }
+            
+            HistoryView()
+                .tabItem {
+                    Label("История", systemImage: "clock")
+                }
         }
     }
     
