@@ -26,6 +26,9 @@ struct HistoryView: View {
                 
                
             }
+            .onAppear {
+                        viewModel.load()   // каждый раз перечитываем файл
+                    }
             .listRowSpacing(10)
             
         }
