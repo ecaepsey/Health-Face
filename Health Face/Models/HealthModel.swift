@@ -14,5 +14,15 @@ struct HealthEntry: Identifiable, Codable, Equatable  {
     let sleepQuality: Int
     let skinCondition: String
     let notes: String?
-    let imagePath: String
+    let imagePath: String?
+    
+    init(id: UUID = UUID(), date: Date, puffiness: Int, sleepQuality: Int, skinCondition: String, notes: String?, imagePath: String? = nil) {
+        self.id = id
+        self.date = date
+        self.puffiness = puffiness
+        self.sleepQuality = sleepQuality
+        self.skinCondition = skinCondition
+        self.notes = notes
+        self.imagePath = imagePath
+    }
 }

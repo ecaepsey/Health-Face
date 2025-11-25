@@ -9,19 +9,19 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-   
+    @StateObject private var newEntryVM = NewEntryViewModel()
     var body: some View {
         TabView {
-            CameraView()
+            CameraView(newEntryVM: newEntryVM)
                 .tabItem {
                     Label("Camera", systemImage: "camera")
                 }
-            CheckListScreen()
+            CheckListScreen(viewModel: newEntryVM)
                 .tabItem {
                     Label("Чек лист", systemImage: "square.and.pencil")
                 }
             
-            HistoryView()
+            HistoryView(viewModel: newEntryVM)
                 .tabItem {
                     Label("История", systemImage: "clock")
                 }

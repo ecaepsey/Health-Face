@@ -14,6 +14,7 @@ struct CameraView: View {
         @State private var image: UIImage?
     @State private var alertMessage: String?
        @State private var showAlert = false
+    @ObservedObject var newEntryVM: NewEntryViewModel
 
     var body: some View {
         VStack(spacing: 20) {
@@ -50,12 +51,16 @@ struct CameraView: View {
             
             Spacer()
         }
-        .sheet(isPresented: $showCamera) {
-            ImagePicker(
-                sourceType: .camera,
-                selectedImage: $image
-            )
-        }
+        .sheet(isPresented: $showCamera, onDismiss: {
+                    if let image {
+                        newEntryVM.setImage(image)   // <— кладём фото в общий VM
+                    }
+                }) {
+                    ImagePicker(
+                        sourceType: .camera,
+                        selectedImage: $image
+                    )
+                }
         .alert("Camera error", isPresented: $showAlert) {
             Button("OK", role: .cancel) { }
         } message: {

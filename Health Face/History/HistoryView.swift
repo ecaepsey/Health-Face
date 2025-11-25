@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @StateObject var viewModel = HistoryViewModel()
+    @ObservedObject var viewModel: NewEntryViewModel
     @State private var selectedEntries: [HealthEntry] = []
     @State private var showCompare = false
     var body: some View {
         
         NavigationStack {
+            
             List {
                 ForEach(viewModel.entries) { entry in
                     
                     VStack {
                         HStack {
                             Text("\(entry.date)")
-                            Image(systemName: "photo")
+                            EntryImageView(entry: entry)
                             Spacer()
                             Text("Сон: 2, Отечность: 5")
                         }
@@ -40,7 +41,7 @@ struct HistoryView: View {
                
             }
             .onAppear {
-                        viewModel.load()   // каждый раз перечитываем файл
+                viewModel.load() // каждый раз перечитываем файл
                     }
             .listRowSpacing(10)
             .navigationTitle("History")
@@ -90,7 +91,3 @@ func getDate() -> String {
     return dateString
 }
 
-
-#Preview {
-    HistoryView()
-}

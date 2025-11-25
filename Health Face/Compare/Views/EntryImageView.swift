@@ -11,7 +11,7 @@ struct EntryImageView: View {
     let entry: HealthEntry
     
     var body: some View {
-        if let uiImage = UIImage(contentsOfFile: entry.imagePath) {
+        if let uiImage = UIImage(contentsOfFile: entry.imagePath!) {
             Image(uiImage: uiImage)
                 .resizable()
                 .scaledToFit()

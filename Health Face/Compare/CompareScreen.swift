@@ -6,15 +6,14 @@ struct CompareView: View {
     
     var body: some View {
         VStack {
-            Text("Compare")
+            Text("Сравнения")
                 .font(.title2)
                 .bold()
             
             HStack {
-                AsyncImage(url: URL(string: "https://i.pravatar.cc/300"))
-                AsyncImage(url: URL(string: "https://i.pravatar.cc/300"))
-//                entryImageView(entry: first)
-//                entryImageView(entry: second)
+               
+                entryImage(first)
+                entryImage(second)
             }
             .padding()
             
@@ -28,20 +27,32 @@ struct CompareView: View {
             
             Spacer()
         }
-        .navigationTitle("Сравнения")
+        
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    private func entryImageView(entry: HealthEntry) -> some View {
-        Group {
-            if let uiImage = UIImage(contentsOfFile: entry.imagePath) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFit()
-            } else {
-                Rectangle()
-                    .overlay(Text("No image"))
-            }
-        }
-    }
+    @ViewBuilder
+       private func entryImage(_ entry: HealthEntry) -> some View {
+           if let fileName = entry.imagePath,
+              let uiImage = loadImage(fileName: fileName) {
+               Image(uiImage: uiImage)
+                   .resizable()
+                   .scaledToFit()
+                   .cornerRadius(12)
+           } else {
+               ZStack {
+                   RoundedRectangle(cornerRadius: 12)
+                       .stroke(.gray.opacity(0.4), style: StrokeStyle(lineWidth: 1, dash: [5]))
+                   Text("Нет фото")
+                       .font(.caption)
+                       .foregroundColor(.secondary)
+               }
+           }
+       }
+    
+    private func loadImage(fileName: String) -> UIImage? {
+           let docsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+           let fileURL = docsURL.appendingPathComponent(fileName)
+           return UIImage(contentsOfFile: fileURL.path)
+       }
 }

@@ -11,10 +11,10 @@ import SwiftUI
 
 struct CheckListScreen: View {
     
-    @StateObject var viewModel = CheckListViewModel()
+    @ObservedObject var viewModel: NewEntryViewModel
     var body: some View {
         VStack {
-            TextField("Сон", value: $viewModel.sleepQuality, format: .number)
+            TextField("Сон", value: $viewModel.puffiness, format: .number)
                 .padding(10)
                                .overlay(
                                    RoundedRectangle(cornerRadius: 7)
@@ -35,7 +35,7 @@ struct CheckListScreen: View {
                                    RoundedRectangle(cornerRadius: 7)
                                     .stroke(.secondary.opacity(0.5), lineWidth: 0.5))
             Button {
-                viewModel.createCheckTapped()
+                viewModel.save()
             } label: {
                 Text("Сохранить запись")
                     .font(.headline)
@@ -48,25 +48,23 @@ struct CheckListScreen: View {
             }
         }
         .padding()
-        .alert(isPresented: $viewModel.showAlert) {
-                    switch viewModel.activeAlert {
-                    case .dataCreated:
-                        Alert(
-                            title: Text("User successfully created."),
-                            message: Text("Please login."),
-                            dismissButton: .cancel(Text("Done"), action: {
-                               
-                            })
-                        )
-                    case .emptyInfo:
-                        Alert(title: Text(viewModel.errorMessage))
-                    case .dataNotCreated:
-                        Alert(title: Text(viewModel.errorMessage))
-                    }
-                }
+//        .alert(isPresented: $viewModel.showAlert) {
+//                    switch viewModel.activeAlert {
+//                    case .dataCreated:
+//                        Alert(
+//                            title: Text("User successfully created."),
+//                            message: Text("Please login."),
+//                            dismissButton: .cancel(Text("Done"), action: {
+//                               
+//                            })
+//                        )
+//                    case .emptyInfo:
+//                        Alert(title: Text(viewModel.errorMessage))
+//                    case .dataNotCreated:
+//                        Alert(title: Text(viewModel.errorMessage))
+//                    }
+//                }
     }
 }
 
-#Preview {
-    CheckListScreen()
-}
+
