@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct HealthEntry: Codable, Identifiable {
+struct HealthEntry: Identifiable, Codable, Equatable  {
     let id: UUID
     let date: Date
     let puffiness: Int
     let sleepQuality: Int
     let skinCondition: String
     let notes: String?
-    let imagePath: String?
+    let imagePath: String
 }

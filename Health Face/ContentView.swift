@@ -25,6 +25,8 @@ struct ContentView: View {
                 .tabItem {
                     Label("История", systemImage: "clock")
                 }
+            
+           
         }
     }
     
