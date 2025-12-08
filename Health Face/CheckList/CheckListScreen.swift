@@ -14,7 +14,7 @@ struct CheckListScreen: View {
     @ObservedObject var viewModel: NewEntryViewModel
     var body: some View {
         VStack {
-            TextField("Сон", value: $viewModel.puffiness, format: .number)
+            TextField("Сон", value: $viewModel.sleep, format: .number)
                 .padding(10)
                                .overlay(
                                    RoundedRectangle(cornerRadius: 7)

@@ -15,56 +15,72 @@ struct CameraView: View {
     @State private var alertMessage: String?
        @State private var showAlert = false
     @ObservedObject var newEntryVM: NewEntryViewModel
+    @State private var showReminderSettings = false   // <- добавили
 
     var body: some View {
-        VStack(spacing: 20) {
-            if let image {
-                // Show captured image
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxHeight: 300)
-                    .cornerRadius(12)
-                    .padding()
-            } else {
-                Text("No photo yet")
-                    .foregroundColor(.secondary)
-            }
-            
-            Button {
-                openCameraTapped()
-            } label: {
-                Text("Сделай фото")
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.black)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-                    .padding(.horizontal)
-            }
-            Text("Ваш эжедневный чек лица")
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .foregroundStyle(.secondary)
-                .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0))
-            
-            Spacer()
-        }
-        .sheet(isPresented: $showCamera, onDismiss: {
-                    if let image {
-                        newEntryVM.setImage(image)   // <— кладём фото в общий VM
-                    }
-                }) {
-                    ImagePicker(
-                        sourceType: .camera,
-                        selectedImage: $image
-                    )
+        NavigationStack {
+            VStack(spacing: 20) {
+                if let image {
+                    // Show captured image
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 300)
+                        .cornerRadius(12)
+                        .padding()
+                } else {
+                    Text("No photo yet")
+                        .foregroundColor(.secondary)
                 }
-        .alert("Camera error", isPresented: $showAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text(alertMessage ?? "Unknown error")
+                
+                Button {
+                    openCameraTapped()
+                } label: {
+                    Text("Сделай фото")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                }
+                Text("Ваш эжедневный чек лица")
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.secondary)
+                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0))
+                
+                Spacer()
+            }
+            .navigationTitle("Health Face")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showReminderSettings = true
+                    } label: {
+                        Image(systemName: "bell")
+                    }
+                }
+            }
+            .sheet(isPresented: $showCamera, onDismiss: {
+                if let image {
+                    newEntryVM.setImage(image)   // <— кладём фото в общий VM
+                }
+            }) {
+                ImagePicker(
+                    sourceType: .camera,
+                    selectedImage: $image
+                )
+            }
+            .sheet(isPresented: $showReminderSettings) {
+                ReminderView()
+            }
+            .alert("Camera error", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(alertMessage ?? "Unknown error")
+            }
         }
     }
     

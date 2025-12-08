@@ -26,3 +26,8 @@ struct HealthEntry: Identifiable, Codable, Equatable  {
         self.imagePath = imagePath
     }
 }
+
+struct ReminderSettings: Codable {
+    var isEnabled: Bool
+    var time: Date
+}

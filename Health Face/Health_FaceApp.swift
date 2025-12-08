@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct Health_FaceApp: App {
+    @AppStorage("didCompleteOnboarding") var didCompleteOnboarding: Bool = false
     var body: some Scene {
+      
+
         WindowGroup {
-            ContentView()
+            if didCompleteOnboarding {
+                ContentView()
+            } else {
+                OnboardingView()
+            }
         }
     }
 }

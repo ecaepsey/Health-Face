@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+    
 struct HistoryView: View {
     @ObservedObject var viewModel: NewEntryViewModel
     @State private var selectedEntries: [HealthEntry] = []
@@ -21,7 +21,7 @@ struct HistoryView: View {
                     VStack {
                         HStack {
                             Text("\(entry.date)")
-                            EntryImageView(entry: entry)
+                            entryImage(entry)
                             Spacer()
                             Text("Сон: 2, Отечность: 5")
                         }
@@ -78,6 +78,31 @@ struct HistoryView: View {
                    selectedEntries[1] = entry
                }
            }
+       }
+    
+    @ViewBuilder
+       private func entryImage(_ entry: HealthEntry) -> some View {
+           if let fileName = entry.imagePath,
+              let uiImage = loadImage(fileName: fileName) {
+               Image(uiImage: uiImage)
+                   .resizable()
+                   .scaledToFit()
+                   .cornerRadius(12)
+           } else {
+               ZStack {
+                   RoundedRectangle(cornerRadius: 12)
+                       .stroke(.gray.opacity(0.4), style: StrokeStyle(lineWidth: 1, dash: [5]))
+                   Text("Нет фото")
+                       .font(.caption)
+                       .foregroundColor(.secondary)
+               }
+           }
+       }
+    
+    private func loadImage(fileName: String) -> UIImage? {
+           let docsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+           let fileURL = docsURL.appendingPathComponent(fileName)
+           return UIImage(contentsOfFile: fileURL.path)
        }
 }
 
