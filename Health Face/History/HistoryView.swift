@@ -6,35 +6,74 @@
 //
 
 import SwiftUI
+
+struct HistoryPhoto: Identifiable {
+    let id = UUID()
+    let image: UIImage
+}
     
 struct HistoryView: View {
     @ObservedObject var viewModel: NewEntryViewModel
     @State private var selectedEntries: [HealthEntry] = []
     @State private var showCompare = false
+    @State private var selectedPhoto: HistoryPhoto?
+   
     var body: some View {
         
         NavigationStack {
-            
+            Text("Выберите две фотографии для сравнения")
+                .font(.headline)
+                .background(.clear)
             List {
+               
                 ForEach(viewModel.entries) { entry in
-                    
-                    VStack {
+                    let isSelected = selectedEntries.contains(entry)
+
+                 
                         HStack {
-                            Text("\(entry.date)")
                             entryImage(entry)
+                            Text(getDate(entry.date))
+                                .font(.system(size: 14))
+                                .fontWeight(.semibold)
                             Spacer()
-                            Text("Сон: 2, Отечность: 5")
+                            Text("сон: \(String(describing: entry.sleepQuality)), отечность:  \(String(describing: entry.puffiness))")
+                                .font(.system(size: 14))
+                                .fontWeight(.semibold)
                         }
-                        SelectEntryButton(
-                            isSelected: selectedEntries.contains(entry)
-                        ) {
-                            toggleSelection(for: entry)
-                        }
+//                        SelectEntryButton(
+//                            isSelected: selectedEntries.contains(entry)
+//                        ) {
+//                            toggleSelection(for: entry)
+//                        }
+                        .padding() // ✅ внутренний отступ для контента
+                              .background(
+                                  RoundedRectangle(cornerRadius: 10)
+                                      .stroke(
+                                          isSelected ? Color.green : Color.gray.opacity(0),
+                                          lineWidth: isSelected ? 2 : 1
+                                      )
+                              )
+                              .contentShape(Rectangle())
+                              .onTapGesture {
+                                  toggleSelection(for: entry)
+                              }
+                              // ✅ ВОТ ЭТИ ДВЕ СТРОКИ ДЕЛАЮТ БОРДЕР ПО КРАЯМ ROW:
+                              .listRowInsets(EdgeInsets())       // убираем системные отступы List
+                              .listRowSeparator(.hidden)         // убираем стандартный сепаратор
+                              
+                     
+                        
+                        
                     }
+                    
+                    
+                    .fullScreenCover(item: $selectedPhoto) { item in
+                                ZoomableImageView(image: item.image)
+                            }
                    
                                       
                                       
-                }
+                
                 
                 
                 
@@ -44,10 +83,10 @@ struct HistoryView: View {
                 viewModel.load() // каждый раз перечитываем файл
                     }
             .listRowSpacing(10)
-            .navigationTitle("History")
+            .navigationTitle("")
                      .toolbar {
                          if selectedEntries.count == 2 {
-                             Button("Compare") {
+                             Button("Сравнить") {
                                  showCompare = true
                              }
                          }
@@ -86,8 +125,13 @@ struct HistoryView: View {
               let uiImage = loadImage(fileName: fileName) {
                Image(uiImage: uiImage)
                    .resizable()
-                   .scaledToFit()
-                   .cornerRadius(12)
+                   .scaledToFill()
+                   
+                   .frame(width: 80, height: 80)
+                       .clipShape(Circle())      // вместо cornerRadius
+                   .onTapGesture {
+                       selectedPhoto = HistoryPhoto(image: uiImage)
+                                       }
            } else {
                ZStack {
                    RoundedRectangle(cornerRadius: 12)
@@ -108,11 +152,47 @@ struct HistoryView: View {
 
 
 
-func getDate() -> String {
-    let date = Date()
+func getDate(_ date: Date) -> String {
     let df = DateFormatter()
-    df.dateFormat = "yyyy-MM-dd"
+    df.dateFormat = "YYYY:MM:dd"
     let dateString = df.string(from: date)
     return dateString
 }
 
+
+struct ZoomableImageView: View {
+    let image: UIImage
+
+    @Environment(\.dismiss) private var dismiss
+    @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
+
+    var body: some View {
+        ZStack(alignment: .topTrailing) {
+            Color.black.ignoresSafeArea()
+
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .scaleEffect(scale)
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged { value in
+                            scale = lastScale * value
+                        }
+                        .onEnded { _ in
+                            lastScale = scale
+                        }
+                )
+
+            Button(action: {
+                dismiss()
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 28))
+                    .foregroundColor(.black)
+                    .padding()
+            }
+        }
+    }
+}

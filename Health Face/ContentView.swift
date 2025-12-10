@@ -11,21 +11,27 @@ import AVFoundation
 struct ContentView: View {
     @StateObject private var newEntryVM = NewEntryViewModel()
     var body: some View {
-        TabView {
-            CameraView(newEntryVM: newEntryVM)
-                .tabItem {
-                    Label("Camera", systemImage: "camera")
-                }
-            CheckListScreen(viewModel: newEntryVM)
-                .tabItem {
-                    Label("Чек лист", systemImage: "square.and.pencil")
-                }
-            
-            HistoryView(viewModel: newEntryVM)
-                .tabItem {
-                    Label("История", systemImage: "clock")
-                }
-            
+        ZStack {
+            Color.gray.ignoresSafeArea() 
+            TabView {
+                CameraView(newEntryVM: newEntryVM)
+                    .tabItem {
+                        Label("Camera", systemImage: "camera")
+                    }
+                CheckListScreen(viewModel: newEntryVM)
+                    .tabItem {
+                        Label("Чек лист", systemImage: "figure.strengthtraining.traditional")
+                    }
+                
+                HistoryView(viewModel: newEntryVM)
+                    .tabItem {
+                        Label("История", systemImage: "chart.line.uptrend.xyaxis")
+                    }
+                
+                
+                
+            }
+            .tint(.green)
            
         }
     }

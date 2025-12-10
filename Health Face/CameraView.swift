@@ -20,6 +20,13 @@ struct CameraView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
+                
+                Text("Ваш эжедневный чек лица")
+                    .font(.title)
+                    .fontWeight(.medium)
+                    
+                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0))
+                Spacer()
                 if let image {
                     // Show captured image
                     Image(uiImage: image)
@@ -29,9 +36,11 @@ struct CameraView: View {
                         .cornerRadius(12)
                         .padding()
                 } else {
-                    Text("No photo yet")
-                        .foregroundColor(.secondary)
+//                    Text("No photo yet")
+//                        .foregroundColor(.secondary)
                 }
+               
+                Spacer()
                 
                 Button {
                     openCameraTapped()
@@ -45,15 +54,12 @@ struct CameraView: View {
                         .cornerRadius(12)
                         .padding(.horizontal)
                 }
-                Text("Ваш эжедневный чек лица")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundStyle(.secondary)
-                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0))
+                .padding(.bottom)
                 
-                Spacer()
+                
+                
             }
-            .navigationTitle("Health Face")
+            
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

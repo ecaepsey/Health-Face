@@ -13,11 +13,13 @@ struct SelectEntryButton: View {
     
     var body: some View {
         Button(action: onTap) {
-            Text(isSelected ? "Selected" : "Select")
-                .padding(8)
-                .background(isSelected ? .green.opacity(0.2) : .gray.opacity(0.1))
-                .cornerRadius(8)
+//            Text(isSelected ? "Selected" : "Select")
+//                .padding(8)
+//
+//                .cornerRadius(8)
         }
+        .background(.clear)
+        
     }
 }
 

@@ -11,8 +11,8 @@ final class NewEntryViewModel: ObservableObject {
     @Published var image: UIImage?
     @Published var skinCondition: String = ""
     @Published var notes: String = ""
-    @Published var puffiness: Int = 0
-    @Published var sleep: Int = 0
+    @Published var puffiness: Int?
+    @Published var sleep: Int?
 
     private let storage = StorageService<HealthEntry>(fileName: "health_entries.json")
 
@@ -39,8 +39,8 @@ final class NewEntryViewModel: ObservableObject {
 
         // 2. Собираем HealthEntry
         let entry = HealthEntry(date: Date(),
-                                puffiness: puffiness,
-                                sleepQuality: sleep,
+                                puffiness: puffiness ?? 0,
+                                sleepQuality: sleep ?? 0,
                                 skinCondition: skinCondition,
                                 notes: notes,
                                 imagePath: filename
