@@ -10,6 +10,14 @@ import AVFoundation
 
 struct ContentView: View {
     @StateObject private var newEntryVM = NewEntryViewModel()
+    
+    @StateObject  var viewModel: HistoryViewModel
+        
+        init(viewModel: HistoryViewModel) {
+            _viewModel = StateObject(wrappedValue: viewModel)
+        }
+    
+    
     var body: some View {
         ZStack {
             Color.gray.ignoresSafeArea() 
@@ -18,12 +26,9 @@ struct ContentView: View {
                     .tabItem {
                         Label("Camera", systemImage: "camera")
                     }
-                CheckListScreen(viewModel: newEntryVM)
-                    .tabItem {
-                        Label("Чек лист", systemImage: "figure.strengthtraining.traditional")
-                    }
                 
-                HistoryView(viewModel: newEntryVM)
+                
+                HistoryView(viewModel: viewModel)
                     .tabItem {
                         Label("История", systemImage: "chart.line.uptrend.xyaxis")
                     }
@@ -42,6 +47,3 @@ struct ContentView: View {
    
 }
 
-#Preview {
-    ContentView()
-}

@@ -13,10 +13,16 @@ struct HistoryPhoto: Identifiable {
 }
     
 struct HistoryView: View {
-    @ObservedObject var viewModel: NewEntryViewModel
+   
     @State private var selectedEntries: [HealthEntry] = []
     @State private var showCompare = false
     @State private var selectedPhoto: HistoryPhoto?
+    
+    @StateObject private var viewModel: HistoryViewModel
+       
+       init(viewModel: HistoryViewModel) {
+           _viewModel = StateObject(wrappedValue: viewModel)
+       }
    
     var body: some View {
         
@@ -80,7 +86,7 @@ struct HistoryView: View {
                
             }
             .onAppear {
-                viewModel.load() // каждый раз перечитываем файл
+                viewModel.fetchHealth(for: "")
                     }
             .listRowSpacing(10)
             .navigationTitle("")

@@ -10,15 +10,24 @@ import SwiftUI
 @main
 struct Health_FaceApp: App {
     @AppStorage("didCompleteOnboarding") var didCompleteOnboarding: Bool = false
+    
+    private let appFactory = AppFactory()
     var body: some Scene {
       
-
+        
         WindowGroup {
-            if didCompleteOnboarding {
-                ContentView()
-            } else {
-                OnboardingView()
-            }
+            
+            AppCoordinatorView(
+                          screenFactory: ScreenFactory(appFactory: appFactory),
+                          coordinator: AppCoordinator(
+                            fetchHealthUseCase: appFactory.makeFetchHealthUseCase()
+                          )
+                      )
+                      .preferredColorScheme(.dark)
+                      .onAppear {
+                         
+                      }
+                  }
         }
-    }
+    
 }

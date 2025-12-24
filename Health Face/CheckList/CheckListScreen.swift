@@ -14,22 +14,8 @@ struct CheckListScreen: View {
     @ObservedObject var viewModel: NewEntryViewModel
     var body: some View {
         VStack {
-            TextField("", value: $viewModel.sleep, format: .number)
-                .placeholder(when: viewModel.sleep ?? 0 < 1) {
-                    Text("введите число от 1 до 10").foregroundColor(.gray)
-                }
-                .padding(10)
-                               .overlay(
-                                   RoundedRectangle(cornerRadius: 7)
-                                    .stroke(.secondary.opacity(0.5), lineWidth: 0.5))
-            TextField("", value: $viewModel.puffiness, format: .number)
-                .placeholder(when: viewModel.puffiness ?? 0 < 1) {
-                    Text("введите число от 1 до 10").foregroundColor(.gray)
-                }
-                .padding(10)
-                               .overlay(
-                                   RoundedRectangle(cornerRadius: 7)
-                                    .stroke(.secondary.opacity(0.5), lineWidth: 0.5))
+            Stepper("Сон: \(viewModel.sleep)", value: $viewModel.sleep, in: 0...10)
+            Stepper("Отёчность: \(viewModel.puffiness)", value: $viewModel.puffiness, in: 0...10)
             TextField("Кожа", text: $viewModel.skinCondition)
                 .padding(10)
                                .overlay(
