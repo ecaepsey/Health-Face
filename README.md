@@ -15,4 +15,4 @@
 - Dependency Injection
 
 # Compare View
-[Image1](/images/image1.png "San Juan Mountains")
+![Image1](/images/image1.png "San Juan Mountains")
