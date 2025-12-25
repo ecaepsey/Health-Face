@@ -16,3 +16,9 @@
 
 # Compare View
 ![Image1](/Images/image1.png "San Juan Mountains")
+
+# Dashboard
+![Image1](/Images/dashboard.jpeg "San Juan Mountains")
+
+# History
+![Image1](/Images/image2.png "San Juan Mountains")
