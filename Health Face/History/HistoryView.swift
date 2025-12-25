@@ -41,6 +41,8 @@ struct HistoryView: View {
                             Text(getDate(entry.date))
                                 .font(.system(size: 14))
                                 .fontWeight(.semibold)
+                            
+                            
                             Spacer()
                             Text("сон: \(String(describing: entry.sleepQuality)), отечность:  \(String(describing: entry.puffiness))")
                                 .font(.system(size: 14))

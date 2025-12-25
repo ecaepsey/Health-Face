@@ -17,10 +17,74 @@ struct CompareView: View {
             }
             .padding()
             
+            
+            
             HStack {
-                Text(first.date.formatted(date: .abbreviated, time: .omitted))
+                VStack(spacing: 12) {
+
+                    HStack {
+                        Text("Hydration")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text("\(first.puffiness)")
+                            .font(.headline)
+                    }
+
+                    HStack {
+                        Text("Сон")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text("\(first.sleepQuality)")
+                            .font(.headline)
+                    }
+
+                    HStack {
+                        Text("Кожа")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text("\(first.skinCondition)")
+                            .font(.headline)
+                    }
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.gray.opacity(0.1))
+                )
+
                 Spacer()
-                Text(second.date.formatted(date: .abbreviated, time: .omitted))
+                VStack(spacing: 12) {
+
+                    HStack {
+                        Text("Hydration")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text("\(second.puffiness)")
+                            .font(.headline)
+                    }
+
+                    HStack {
+                        Text("Сон")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text("\(second.sleepQuality)")
+                            .font(.headline)
+                    }
+
+                    HStack {
+                        Text("Кожа")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text("\(second.skinCondition)")
+                            .font(.headline)
+                    }
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.gray.opacity(0.1))
+                )
+
             }
             .font(.caption)
             .padding(.horizontal)
