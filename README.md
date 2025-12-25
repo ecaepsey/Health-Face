@@ -5,3 +5,11 @@
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-Yes-green)
 ![MVVM](https://img.shields.io/badge/Architecture-MVVM-purple)
 
+# :electric_plug: Tech stack
+
+- Swift
+- SwiftUI
+- Combine
+- Clean Architecture
+- MVVM-C + ViewState
+- Dependency Injection
