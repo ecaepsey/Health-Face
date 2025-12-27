@@ -15,48 +15,61 @@ struct CameraView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 16) {
+            VStack(spacing: 0) {
 
-                Text("Ваш ежедневный чек лица")
-                    .font(.title2)
-                    .fontWeight(.medium)
-                    .padding(.top, 8)
-
-                Spacer()
+               
+               
 
                 if let image {
                     // ✅ REVIEW
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: 340)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .padding(.horizontal)
+                    GeometryReader { geo in
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(
+                                        width: geo.size.width,
+                                        height: .infinity
+                                    )
+                                    .clipped()
+                            }
+                            .ignoresSafeArea(edges: .top)
+                    
+                    
 
                     // ✅ Actions after photo
-                    HStack(spacing: 12) {
-                        Button {
-                            // переснять
-                            self.image = nil
-                           
-                            openCameraTapped()
-                        } label: {
-                            Text("Переснять")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.bordered)
+                    VStack(spacing: 0) {
+                                HStack(spacing: 12) {
+                                    Button {
+                                        self.image = nil
+                                        openCameraTapped()
+                                    } label: {
+                                        Text("Переснять")
+                                            .frame(maxWidth: .infinity)
+                                    }
+                                    .buttonStyle(.bordered)
 
-                        Button {
-                            // открыть форму записи
-                            showAddRecordSheet = true
-                        } label: {
-                            Text("Добавить запись")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.green)
-                    }
-                    .padding(.horizontal)
+                                    Button {
+                                        showAddRecordSheet = true
+                                    } label: {
+                                        Text("Добавить запись")
+                                            .frame(maxWidth: .infinity)
+                                    }
+                                    .buttonStyle(.borderedProminent)
+                                }
+                            }
+                    .padding(20)
+                            .background(
+                                Color(.systemGray4)
+                            )
+                            .clipShape(
+                                RoundedRectangle(
+                                    cornerRadius: 24,
+                                    style: .continuous
+                                )
+                            )
+                            
+                            .offset(y: -10) // 🔥 НАЕЗЖАЕМ НА ФОТО
+
 
                 } else {
                     // ✅ CAMERA EMPTY STATE
