@@ -43,7 +43,7 @@ struct CameraView: View {
                                         self.image = nil
                                         openCameraTapped()
                                     } label: {
-                                        Text("Переснять")
+                                        Text(LocalizedStringKey("Dashboard.retakeButton.title"))
                                             .frame(maxWidth: .infinity)
                                     }
                                     .buttonStyle(.bordered)
@@ -51,7 +51,7 @@ struct CameraView: View {
                                     Button {
                                         showAddRecordSheet = true
                                     } label: {
-                                        Text("Добавить запись")
+                                        Text(LocalizedStringKey("Dashboard.addPostButton.title"))
                                             .frame(maxWidth: .infinity)
                                     }
                                     .buttonStyle(.borderedProminent)
@@ -78,7 +78,7 @@ struct CameraView: View {
                             .font(.system(size: 42))
                             .foregroundStyle(.secondary)
 
-                        Text("Сделай фото, чтобы добавить запись")
+                        Text(LocalizedStringKey("Welcome"))
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
@@ -92,7 +92,7 @@ struct CameraView: View {
                     Button {
                         openCameraTapped()
                     } label: {
-                        Text("Сделай фото")
+                        Text(LocalizedStringKey("Dashboard.button.title"))
                             .font(.headline)
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -138,7 +138,7 @@ struct CameraView: View {
                     .presentationDragIndicator(.visible)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
-                            Button("Сохранить") {
+                            Button(LocalizedStringKey("Dashboard.saveButton.title")) {
                                 // ⚠️ замени на свой метод сохранения записи
                                 newEntryVM.save()
 
@@ -147,7 +147,7 @@ struct CameraView: View {
                             }
                         }
                         ToolbarItem(placement: .cancellationAction) {
-                            Button("Отмена") {
+                            Button(LocalizedStringKey("Dashboard.saveButton.cancel")){
                                 showAddRecordSheet = false
                             }
                         }

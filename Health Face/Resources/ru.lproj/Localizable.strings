@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Health Face
+
+  Created by Damir Aushenov on 27/12/25.
+  
+*/
+
+"Welcome" = "Сделайте фото, для того чтобы сделать запись";
+"Dashboard.button.title" = "Сделай фото";
+"Dashboard.saveButton.title" = "Сохранить";
+"Dashboard.cancel.title" = "Отмена";
+"Dashboard.retakeButton.title" = "Переснять";
+"Dashboard.addPostButton.title" = "Добавить запись";
