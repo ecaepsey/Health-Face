@@ -27,13 +27,16 @@ struct HistoryView: View {
     var body: some View {
         
         NavigationStack {
-            Text("Выберите две фотографии для сравнения")
+           
+            Text(LocalizedStringKey("HistoryView.title.text"))
                 .font(.headline)
                 .background(.clear)
             List {
                
                 ForEach(viewModel.entries) { entry in
                     let isSelected = selectedEntries.contains(entry)
+                    let sleep = String(describing: entry.sleepQuality)
+                    let puff = String(describing: entry.puffiness)
 
                  
                         HStack {
@@ -44,7 +47,14 @@ struct HistoryView: View {
                             
                             
                             Spacer()
-                            Text("сон: \(String(describing: entry.sleepQuality)), отечность:  \(String(describing: entry.puffiness))")
+                            Text(
+                                LocalizedStringKey(
+                                    "HistoryView.desc.text".localized(with: [sleep, puff]))
+                                
+                                    
+                              
+                               
+                            )
                                 .font(.system(size: 14))
                                 .fontWeight(.semibold)
                         }
@@ -202,5 +212,13 @@ struct ZoomableImageView: View {
                     .padding()
             }
         }
+    }
+}
+
+
+
+extension String {
+    public func localized(with arguments: [CVarArg]) -> String {
+        return String(format: NSLocalizedString(self, comment: ""), locale: nil, arguments: arguments)
     }
 }

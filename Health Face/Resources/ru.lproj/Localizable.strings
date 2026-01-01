@@ -12,3 +12,5 @@
 "Dashboard.cancel.title" = "Отмена";
 "Dashboard.retakeButton.title" = "Переснять";
 "Dashboard.addPostButton.title" = "Добавить запись";
+"HistoryView.title.text" = "Выберите две фотографии для сравнения";
+"HistoryView.desc.text" = "Сон: %@, отечность: %@";

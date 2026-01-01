@@ -11,3 +11,5 @@
 "Dashboard.cancel.title" = "Cancel";
 "Dashboard.retakeButton.title" = "retake";
 "Dashboard.addPostButton.title" = "Add Post";
+"HistoryView.title.text" = "Select two photos for comparing";
+"HistoryView.desc.text" = "Sleep: %@, Puffiness: %@";
