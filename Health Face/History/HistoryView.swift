@@ -7,12 +7,15 @@
 
 import SwiftUI
 
-struct HistoryPhoto: Identifiable {
-    let id = UUID()
-    let image: UIImage
-}
+
     
 struct HistoryView: View {
+    
+    struct HistoryPhoto: Identifiable {
+        let id = UUID()
+        let image: UIImage
+    }
+
    
     @State private var selectedEntries: [HealthEntry] = []
     @State private var showCompare = false
@@ -104,7 +107,7 @@ struct HistoryView: View {
             .navigationTitle("")
                      .toolbar {
                          if selectedEntries.count == 2 {
-                             Button("Сравнить") {
+                             Button(LocalizedStringKey("HistoryView.compare.text")) {
                                  showCompare = true
                              }
                          }
@@ -154,7 +157,7 @@ struct HistoryView: View {
                ZStack {
                    RoundedRectangle(cornerRadius: 12)
                        .stroke(.gray.opacity(0.4), style: StrokeStyle(lineWidth: 1, dash: [5]))
-                   Text("Нет фото")
+                   Text(LocalizedStringKey("HistoryView.noPhoto.text"))
                        .font(.caption)
                        .foregroundColor(.secondary)
                }
@@ -217,8 +220,3 @@ struct ZoomableImageView: View {
 
 
 
-extension String {
-    public func localized(with arguments: [CVarArg]) -> String {
-        return String(format: NSLocalizedString(self, comment: ""), locale: nil, arguments: arguments)
-    }
-}

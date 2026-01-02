@@ -14,3 +14,14 @@
 "Dashboard.addPostButton.title" = "Добавить запись";
 "HistoryView.title.text" = "Выберите две фотографии для сравнения";
 "HistoryView.desc.text" = "Сон: %@, отечность: %@";
+"HistoryView.compare.text" = "Сравнить";
+"HistoryView.noPhoto.text" = "Нет фото";
+"CompareView.compare.text" = "Сравнения";
+"CompareView.hydration.text" = "Гидратация";
+"CompareView.sleep.text" = "Сон";
+"CompareView.skin.text" = "Кожа";
+"CheckListScreen.sleep.text" = "Сон: %@";
+"CheckListScreen.hydration.text" = "Отечность: %@";
+"CheckListScreen.skin.text" = "Кожа";
+"CheckListScreen.notes.text" = "Заметки";
+"CheckListScreen.saveNotes.text" = "Сохранить запись";

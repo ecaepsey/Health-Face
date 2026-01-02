@@ -13,3 +13,14 @@
 "Dashboard.addPostButton.title" = "Add Post";
 "HistoryView.title.text" = "Select two photos for comparing";
 "HistoryView.desc.text" = "Sleep: %@, Puffiness: %@";
+"HistoryView.compare.text" = "Compare";
+"HistoryView.noPhoto.text" = "No photo";
+"CompareView.compare.text" = "Comparing";
+"CompareView.hydration.text" = "Отеченость";
+"CompareView.sleep.text" = "Sleeo";
+"CompareView.skin.text" = "Skin";
+"CheckListScreen.sleep.text" = "Sleep: %@";
+"CheckListScreen.hydration.text" = "Hydration: %@";
+"CheckListScreen.skin.text" = "Skin";
+"CheckListScreen.notes.text" = "Notes";
+"CheckListScreen.saveNotes.text" = "Save notes";

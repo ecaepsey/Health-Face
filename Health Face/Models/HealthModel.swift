@@ -31,3 +31,4 @@ struct ReminderSettings: Codable {
     var isEnabled: Bool
     var time: Date
 }
+

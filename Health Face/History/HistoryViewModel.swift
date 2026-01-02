@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 
 final class HistoryViewModel: ObservableObject {
+    
+  
    
 
     private let storage = StorageService<HealthEntry>(fileName: "health_entries.json")

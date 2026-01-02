@@ -6,7 +6,7 @@ struct CompareView: View {
     
     var body: some View {
         VStack {
-            Text("Сравнения")
+            Text(LocalizedStringKey("CompareView.compare.text"))
                 .font(.title2)
                 .bold()
             
@@ -23,7 +23,7 @@ struct CompareView: View {
                 VStack(spacing: 12) {
 
                     HStack {
-                        Text("Hydration")
+                        Text(LocalizedStringKey("CompareView.hydration.text"))
                             .foregroundColor(.secondary)
                         Spacer()
                         Text("\(first.puffiness)")
@@ -31,7 +31,7 @@ struct CompareView: View {
                     }
 
                     HStack {
-                        Text("Сон")
+                        Text(LocalizedStringKey("CompareView.sleep.text"))
                             .foregroundColor(.secondary)
                         Spacer()
                         Text("\(first.sleepQuality)")
@@ -39,7 +39,7 @@ struct CompareView: View {
                     }
 
                     HStack {
-                        Text("Кожа")
+                        Text(LocalizedStringKey("CompareView.skin.text"))
                             .foregroundColor(.secondary)
                         Spacer()
                         Text("\(first.skinCondition)")
@@ -56,7 +56,7 @@ struct CompareView: View {
                 VStack(spacing: 12) {
 
                     HStack {
-                        Text("Hydration")
+                        Text(LocalizedStringKey("CompareView.hydration.text"))
                             .foregroundColor(.secondary)
                         Spacer()
                         Text("\(second.puffiness)")
@@ -64,7 +64,7 @@ struct CompareView: View {
                     }
 
                     HStack {
-                        Text("Сон")
+                        Text(LocalizedStringKey("CompareView.sleep.text"))
                             .foregroundColor(.secondary)
                         Spacer()
                         Text("\(second.sleepQuality)")
@@ -72,7 +72,7 @@ struct CompareView: View {
                     }
 
                     HStack {
-                        Text("Кожа")
+                        Text(LocalizedStringKey("CompareView.skin.text"))
                             .foregroundColor(.secondary)
                         Spacer()
                         Text("\(second.skinCondition)")
