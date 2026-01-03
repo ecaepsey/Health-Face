@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct Health_FaceApp: App {
     @AppStorage("didCompleteOnboarding") var didCompleteOnboarding: Bool = false
-    
+    @Environment(\.colorScheme) var colorScheme
     private let appFactory = AppFactory()
     var body: some Scene {
       
@@ -23,7 +23,7 @@ struct Health_FaceApp: App {
                             fetchHealthUseCase: appFactory.makeFetchHealthUseCase()
                           )
                       )
-                      .preferredColorScheme(.dark)
+            .preferredColorScheme(colorScheme == .dark ? .dark : .light)
                       .onAppear {
                          
                       }
