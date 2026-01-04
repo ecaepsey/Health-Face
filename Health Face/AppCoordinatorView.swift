@@ -23,7 +23,7 @@ struct AppCoordinatorView: View {
     var body: some View {
         sceneView
             .onAppear {
-                coordinator.handle(.showMain)
+                coordinator.handle(.showAuth)
             }
     }
 
@@ -38,7 +38,11 @@ struct AppCoordinatorView: View {
 //                .tint(.appAccent)
 //                .backgroundColor()
 
-       
+        case .auth:
+                AuthCoordinatorView(
+                    AuthCoordinator(showMainSceneHandler: { coordinator.handle(.showMain) }),
+                    factory: screenFactory
+                )
 
         case .main:
             MainCoordinatorView(

@@ -15,12 +15,12 @@ final class AppCoordinator: ObservableObject {
 
     enum State {
         case idle
-       
+        case auth
         case main
     }
 
     enum Action {
-       
+        case showAuth
         case showMain
         
     }
@@ -43,14 +43,19 @@ final class AppCoordinator: ObservableObject {
       
         case .showMain:
             state = .main
+            
+        case .showAuth:
+                    state = .auth
         }
+        
+        
     }
 }
 
 private extension AppCoordinator {
 
     func loadData() async {
-        state = .main
+        state = .auth
 
         do {
            
