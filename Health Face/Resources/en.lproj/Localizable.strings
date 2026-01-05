@@ -24,3 +24,6 @@
 "CheckListScreen.skin.text" = "Skin";
 "CheckListScreen.notes.text" = "Notes";
 "CheckListScreen.saveNotes.text" = "Save notes";
+"LoginView.username.text" = "Имя пользователя";
+"LoginView.password.text" = "Пароль";
+"LoginView.login.text" = "Вход";
