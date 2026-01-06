@@ -11,7 +11,7 @@ import SwiftUI
 struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel
     @State private var username = ""
-    
+    @FocusState private var isFocused: Bool
     init(viewModel: LoginViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -19,16 +19,32 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Text("Welcome back!")
+                .bold()
+                .font(.title)
+                .padding(.horizontal)
             TextField(LocalizedStringKey("LoginView.username.text"), text: $username)
-                .padding(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 7)
-                        .stroke(.secondary.opacity(0.5), lineWidth: 0.5))
+                .padding(12)
+                   .background(
+                       RoundedRectangle(cornerRadius: 10)
+                           .fill(Color(.systemGray6))
+                           .overlay(
+                               RoundedRectangle(cornerRadius: 10)
+                                   .stroke(isFocused ? Color.blue : Color.clear, lineWidth: 1)
+                           )
+                   )
+            
+                
             TextField(LocalizedStringKey("LoginView.password.text"), text: $username)
-                .padding(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 7)
-                        .stroke(.secondary.opacity(0.5), lineWidth: 0.5))
+                .padding(12)
+                   .background(
+                       RoundedRectangle(cornerRadius: 10)
+                           .fill(Color(.systemGray6))
+                           .overlay(
+                               RoundedRectangle(cornerRadius: 10)
+                                   .stroke(isFocused ? Color.blue : Color.clear, lineWidth: 1)
+                           )
+                   )
+               
             
             Button {
                 
