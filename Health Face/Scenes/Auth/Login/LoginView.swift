@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel
-    @State private var username = ""
+    
     @FocusState private var isFocused: Bool
     init(viewModel: LoginViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -22,7 +22,7 @@ struct LoginView: View {
                 .bold()
                 .font(.title)
                 .padding(.horizontal)
-            TextField(LocalizedStringKey("LoginView.username.text"), text: $username)
+            TextField(LocalizedStringKey("LoginView.username.text"), text: username)
                 .padding(12)
                    .background(
                        RoundedRectangle(cornerRadius: 10)
@@ -34,7 +34,7 @@ struct LoginView: View {
                    )
             
                 
-            TextField(LocalizedStringKey("LoginView.password.text"), text: $username)
+            TextField(LocalizedStringKey("LoginView.password.text"), text: password)
                 .padding(12)
                    .background(
                        RoundedRectangle(cornerRadius: 10)
@@ -47,7 +47,7 @@ struct LoginView: View {
                
             
             Button {
-                
+                viewModel.handle(.logInTapped)
             } label: {
                 Text(LocalizedStringKey("LoginView.login.text"))
                     .font(.headline)
@@ -65,4 +65,18 @@ struct LoginView: View {
         .padding(14)
         
     }
+    
+    private var username: Binding<String> {
+            Binding(
+                get: { viewModel.state.username },
+                set: { viewModel.handle(.usernameChanged($0)) }
+            )
+        }
+    
+    private var password: Binding<String> {
+            Binding(
+                get: { viewModel.state.password },
+                set: { viewModel.handle(.passwordChanged($0)) }
+            )
+        }
 }

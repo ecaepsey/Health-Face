@@ -33,6 +33,8 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
         updatePathForLogin()
         navigationPath.append(.login)
     }
+    
+    
 
     
 }

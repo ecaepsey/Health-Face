@@ -13,4 +13,5 @@ import Foundation
 @MainActor
 protocol AuthCoordinatorProtocol {
     func showLogin()
+    func showMainScene()
 }

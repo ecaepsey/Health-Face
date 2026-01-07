@@ -46,11 +46,22 @@ final class LoginViewModel: ViewModel {
     }
     
     func handle(_ event: LoginViewEvent) {
-          
+        switch event {
+            
+        case .usernameChanged(let login):
+                    state.username = login
+                    
+                case .passwordChanged(let password):
+                    state.password = password
+        case .logInTapped:
+            coordinator.showMainScene()
+        }
        }
 }
 
 
 enum LoginViewEvent {
-   
+    case usernameChanged(String)
+    case passwordChanged(String)
+    case logInTapped
 }
