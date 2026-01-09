@@ -25,6 +25,15 @@ struct LoginView: View {
                     .frame(height: 240)      // 200–300 px
                     
                     .clipped()
+                    .overlay {
+                        Image("logo")
+                            
+                                           .resizable()
+                                           .scaledToFit()
+                                           .frame(width: 40, height: 40)
+                                           
+                                           
+                    }
                 
                 Spacer()
             }
