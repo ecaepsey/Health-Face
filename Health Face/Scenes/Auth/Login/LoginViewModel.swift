@@ -55,6 +55,8 @@ final class LoginViewModel: ViewModel {
                     state.password = password
         case .logInTapped:
             coordinator.showMainScene()
+        case .registerTapped:
+            self.coordinator.showRegisterScene()
         }
        }
 }
@@ -64,4 +66,5 @@ enum LoginViewEvent {
     case usernameChanged(String)
     case passwordChanged(String)
     case logInTapped
+    case registerTapped
 }

@@ -14,4 +14,5 @@ import Foundation
 protocol AuthCoordinatorProtocol {
     func showLogin()
     func showMainScene()
+    func showRegisterScene()
 }

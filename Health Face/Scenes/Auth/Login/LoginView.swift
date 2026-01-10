@@ -82,11 +82,23 @@ struct LoginView: View {
                 }
                 
                 
+                HStack {
+                    Text("Haven't any account?")
+                    Button {
+                        viewModel.handle(.registerTapped)
+                    } label: {
+                        Text("Sign Up")
+                    }
+                }
+                
+                
                 
                 
             }
             .frame(maxWidth: 360)
             .padding(.horizontal, 24)
+            
+           
            
         }
         .ignoresSafeArea(edges: .top)

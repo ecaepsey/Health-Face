@@ -11,6 +11,7 @@ final class AuthCoordinator: Coordinator {
 
     enum Screen: Routable {
         case login
+        case registration
        
        
     }
@@ -34,6 +35,11 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
         navigationPath.append(.login)
     }
     
+    func showRegisterScene() {
+        updatePathForRegistration()
+        navigationPath.append(.registration)
+    }
+    
     
 
     
@@ -41,17 +47,24 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
 
 private extension AuthCoordinator {
 
-    func updatePathForPersonalInfoRegistration() {
+    func updatePathForRegistration() {
         if case .login = navigationPath.last {
             navigationPath.removeLast()
         }
     }
+    
+    
 
     func updatePathForLogin() {
         switch navigationPath.last {
-       
+        case .registration:
+                   
+            navigationPath.removeLast()
+            navigationPath.removeLast()
 
-        default: break
-        }
+              
+
+                default: break
+                }
     }
 }

@@ -31,6 +31,9 @@ struct AuthCoordinatorView: View {
         switch screen {
         case .login:
             factory.makeLoginView(coordinator: coordinator)
+            
+        case .registration:
+            factory.makeRegistrationView(coordinator: coordinator)
 
         }
     }

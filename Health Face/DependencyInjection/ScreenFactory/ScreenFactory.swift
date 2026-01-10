@@ -42,6 +42,22 @@ extension ScreenFactory: LoginViewFactory {
     }
 }
 
+extension ScreenFactory: RegistrationViewFactory {
+    func makeRegistrationView(
+       
+        coordinator: AuthCoordinatorProtocol
+    ) -> RegistrationView {
+        let viewModel = RegistrationViewModel(
+          
+            coordinator: coordinator
+            
+        )
+        let view = RegistrationView(viewModel: viewModel)
+
+        return view
+    }
+}
+
 protocol HomeCoordinatorFactory: HomeViewFactory {}
 
 
@@ -67,11 +83,19 @@ protocol HistoryViewFactory {
     func makeHistoryView(coordinator: HistoryCoordinatorProtocol) -> HistoryView
 }
 
-protocol AuthCoordinatorFactory: LoginViewFactory
+protocol AuthCoordinatorFactory: LoginViewFactory, RegistrationViewFactory
                                  {}
 
 
 @MainActor
 protocol LoginViewFactory {
     func makeLoginView(coordinator: AuthCoordinatorProtocol) -> LoginView
+}
+
+
+@MainActor
+protocol RegistrationViewFactory {
+    func makeRegistrationView(
+        coordinator: AuthCoordinatorProtocol
+    ) -> RegistrationView
 }
