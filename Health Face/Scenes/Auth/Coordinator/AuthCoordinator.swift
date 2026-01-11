@@ -31,13 +31,11 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
     }
 
     func showLogin() {
-        updatePathForLogin()
-        navigationPath.append(.login)
+        navigationPath = [.login]
     }
     
     func showRegisterScene() {
-        updatePathForRegistration()
-        navigationPath.append(.registration)
+        navigationPath = [.registration]
     }
     
     
@@ -48,6 +46,10 @@ extension AuthCoordinator: AuthCoordinatorProtocol {
 private extension AuthCoordinator {
 
     func updatePathForRegistration() {
+        
+        
+      
+        
         if case .login = navigationPath.last {
             navigationPath.removeLast()
         }
@@ -57,10 +59,14 @@ private extension AuthCoordinator {
 
     func updatePathForLogin() {
         switch navigationPath.last {
+        
+      
+            
+            
         case .registration:
                    
             navigationPath.removeLast()
-            navigationPath.removeLast()
+           
 
               
 

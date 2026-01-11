@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
-
+import FirebaseCore
 @main
 struct Health_FaceApp: App {
     @AppStorage("didCompleteOnboarding") var didCompleteOnboarding: Bool = false
     @Environment(\.colorScheme) var colorScheme
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     private let appFactory = AppFactory()
     var body: some Scene {
       
@@ -30,4 +31,11 @@ struct Health_FaceApp: App {
                   }
         }
     
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
 }

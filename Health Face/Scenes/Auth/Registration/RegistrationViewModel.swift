@@ -9,15 +9,30 @@ import Foundation
 
 class RegistrationViewModel: ViewModel {
     struct RegistrationViewState: Equatable {
-       
+        var username = ""
+        var password = ""
+
+        var isLoading = false
+        var loginError: String?
+
+        var isLogInDisabled: Bool {
+            username.isEmpty || password.isEmpty
+        }
+
+        var isLoginErrorShowing: Bool {
+            loginError != nil && isLoading == false
+        }
     }
     
     enum RegistrationViewEvent {
-       
+       case loginTapped
     }
     
     func handle(_ event: RegistrationViewEvent) {
-       
+        switch event {
+        case .loginTapped:
+            coordinator.showLogin()
+        }
     }
     private let coordinator: AuthCoordinatorProtocol
     
