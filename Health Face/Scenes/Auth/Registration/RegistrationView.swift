@@ -44,7 +44,19 @@ struct RegistrationView: View {
                     .bold()
                     .font(.title)
                     .padding(.horizontal)
-                TextField(LocalizedStringKey("Имя и фамилия"), text: username)
+//                TextField(LocalizedStringKey("Имя и фамилия"), text: username)
+//                    .padding(12)
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 10)
+//                            .fill(Color(.systemGray6))
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 10)
+//                                    .stroke(isFocused ? Color.blue : Color.clear, lineWidth: 1)
+//                            )
+//                    )
+                
+                
+                TextField(LocalizedStringKey("email"), text: username)
                     .padding(12)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
@@ -55,19 +67,7 @@ struct RegistrationView: View {
                             )
                     )
                 
-                
-                TextField(LocalizedStringKey("email"), text: password)
-                    .padding(12)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(.systemGray6))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(isFocused ? Color.blue : Color.clear, lineWidth: 1)
-                            )
-                    )
-                
-                TextField(LocalizedStringKey("Password}"), text: password)
+                TextField(LocalizedStringKey("Password"), text: password)
                     .padding(12)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
@@ -81,7 +81,7 @@ struct RegistrationView: View {
                 
                 
                 Button {
-                    viewModel.handle(.loginTapped)
+                    viewModel.handle(.register)
                 } label: {
                     Text(LocalizedStringKey("Создать аккаунт"))
                         .font(.headline)
@@ -121,14 +121,14 @@ struct RegistrationView: View {
     private var username: Binding<String> {
             Binding(
                 get: { viewModel.state.username },
-                set: { _ in  }
+                set: { viewModel.handle(.usernameChanged($0)) }
             )
         }
     
     private var password: Binding<String> {
             Binding(
                 get: { viewModel.state.password },
-                set: { _ in }
+                set: { viewModel.handle(.passwordChanged($0)) }
             )
         }
 }

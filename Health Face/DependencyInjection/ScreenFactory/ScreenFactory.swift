@@ -49,7 +49,7 @@ extension ScreenFactory: RegistrationViewFactory {
     ) -> RegistrationView {
         let viewModel = RegistrationViewModel(
           
-            coordinator: coordinator
+            coordinator: coordinator, registerUserUseCase: appFactory.makeRegisterUserUseCase()
             
         )
         let view = RegistrationView(viewModel: viewModel)
