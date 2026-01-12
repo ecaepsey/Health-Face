@@ -59,7 +59,7 @@ class RegistrationViewModel: ViewModel {
     @Published private(set) var state: RegistrationViewState
     
     func registerTapped() async {
-        print("request")
+        
            let userRegister = UserRegister(
                
                password: state.password,
