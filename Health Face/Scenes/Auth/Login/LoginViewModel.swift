@@ -40,9 +40,12 @@ final class LoginViewModel: ViewModel {
     @Published private(set) var state: LoginViewState
     private let coordinator: AuthCoordinatorProtocol
     
-    init(coordinator: AuthCoordinatorProtocol) {
+    private let loginUseCase: LoginUseCase
+    
+    init(coordinator: AuthCoordinatorProtocol, loginUseCase: LoginUseCase) {
         state = .init()
         self.coordinator = coordinator
+        self.loginUseCase = loginUseCase
     }
     
     func handle(_ event: LoginViewEvent) {
@@ -54,10 +57,23 @@ final class LoginViewModel: ViewModel {
                 case .passwordChanged(let password):
                     state.password = password
         case .logInTapped:
-            coordinator.showMainScene()
+            Task { await logInTapped()}
         case .registerTapped:
             self.coordinator.showRegisterScene()
         }
+       }
+    
+    
+       func logInTapped() async {
+           state.isLoading = true
+           do {
+               try await loginUseCase.execute(email: state.username, password: state.password)
+               state.loginError = nil
+               coordinator.showMainScene()
+           } catch {
+//               state.loginError = LocalizedKey.ErrorMessage.loginFailed
+           }
+           state.isLoading = false
        }
 }
 

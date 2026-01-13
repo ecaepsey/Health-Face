@@ -23,7 +23,7 @@ enum Gender: String, CaseIterable, Identifiable {
     }
 }
 
-struct LoginCredentials: Encodable {
-    let username: String
+struct LoginCredentials {
+    let email: String
     let password: String
 }

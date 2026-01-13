@@ -30,6 +30,10 @@ extension AppFactory {
     func makeRegisterUserUseCase() -> RegisterUserUseCase {
            RegisterUserUseCase(authRepository: authRepository)
        }
+    
+    func makeLoginUseCase() -> LoginUseCase {
+        LoginUseCase(authRepository: authRepository)
+       }
 }
 
 

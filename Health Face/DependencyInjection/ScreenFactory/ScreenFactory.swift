@@ -34,7 +34,8 @@ final class ScreenFactory: HomeCoordinatorFactory, HistoryCoordinatorFactory, Au
 extension ScreenFactory: LoginViewFactory {
     func makeLoginView(coordinator: AuthCoordinatorProtocol) -> LoginView {
         let viewModel = LoginViewModel(
-            coordinator: coordinator
+            coordinator: coordinator,
+            loginUseCase: appFactory.makeLoginUseCase()
         )
         let view = LoginView(viewModel: viewModel)
 
