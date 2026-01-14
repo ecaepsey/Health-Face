@@ -27,3 +27,4 @@
 "LoginView.username.text" = "Имя пользователя";
 "LoginView.password.text" = "Пароль";
 "LoginView.login.text" = "Вход";
+"LoginFailed" = "Login Failed";

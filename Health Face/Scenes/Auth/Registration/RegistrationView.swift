@@ -102,6 +102,8 @@ struct RegistrationView: View {
                         Text("Sign Up")
                     }
                 }
+                .errorFooter(message: viewModel.state.registerError,
+                             isShowed: viewModel.state.isRegisterErrorShowing)
                 
                 
                 

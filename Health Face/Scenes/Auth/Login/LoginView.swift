@@ -90,6 +90,9 @@ struct LoginView: View {
                         Text("Sign Up")
                     }
                 }
+                .errorFooter(message: viewModel.state.loginError,
+                             isShowed: viewModel.state.isLoginErrorShowing)
+                
                 
                 
                 
@@ -101,6 +104,7 @@ struct LoginView: View {
            
            
         }
+        
         .ignoresSafeArea(edges: .top)
         
     }
@@ -118,4 +122,29 @@ struct LoginView: View {
                 set: { viewModel.handle(.passwordChanged($0)) }
             )
         }
+}
+
+struct ErrorFooterViewModifier: ViewModifier {
+
+    var message: String?
+    var isShowed: Bool
+
+    func body(content: Content) -> some View {
+        VStack(alignment: .center) {
+            content
+
+            if isShowed, message?.isEmpty == false {
+                Text(LocalizedStringKey(message ?? ""))
+                    .font(.callout)
+                    .foregroundStyle(.red)
+                    .animation(.bouncy, value: message)
+            }
+        }
+    }
+}
+
+extension View {
+    func errorFooter(message: String?, isShowed: Bool) -> some View {
+        modifier(ErrorFooterViewModifier(message: message, isShowed: isShowed))
+    }
 }

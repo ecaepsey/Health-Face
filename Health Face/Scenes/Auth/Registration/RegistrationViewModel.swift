@@ -13,14 +13,14 @@ class RegistrationViewModel: ViewModel {
         var password = ""
 
         var isLoading = false
-        var loginError: String?
+        var registerError: String?
 
         var isLogInDisabled: Bool {
             username.isEmpty || password.isEmpty
         }
 
-        var isLoginErrorShowing: Bool {
-            loginError != nil && isLoading == false
+        var isRegisterErrorShowing: Bool {
+            registerError != nil && isLoading == false
         }
     }
     
@@ -75,7 +75,7 @@ class RegistrationViewModel: ViewModel {
                coordinator.showMainScene()
            } catch {
                print("error", error)
-//               state.registerError = LocalizedKey.ErrorMessage.registrationFailed
+               state.registerError = "RegisterError"
            }
         print("success")
            state.isLoading = false

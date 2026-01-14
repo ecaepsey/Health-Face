@@ -7,7 +7,7 @@
 
 import Foundation
 
-import Foundation
+import SwiftUI
 
 @MainActor
 protocol ViewModel<State, Event>: ObservableObject where State: Equatable {
@@ -71,7 +71,7 @@ final class LoginViewModel: ViewModel {
                state.loginError = nil
                coordinator.showMainScene()
            } catch {
-//               state.loginError = LocalizedKey.ErrorMessage.loginFailed
+               state.loginError = "LoginFailed"
            }
            state.isLoading = false
        }
@@ -84,3 +84,4 @@ enum LoginViewEvent {
     case logInTapped
     case registerTapped
 }
+
