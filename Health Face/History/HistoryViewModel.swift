@@ -14,7 +14,7 @@ final class HistoryViewModel: ObservableObject {
   
    
 
-    private let storage = StorageService<HealthEntry>(fileName: "health_entries.json")
+    
     
     private let fetchHealhUseCase: FetchHealthUseCase
     
@@ -55,10 +55,7 @@ final class HistoryViewModel: ObservableObject {
       }
     
     
-    
-    func load() {
-        entries = storage.load()
-    }
+ 
 
    
 
