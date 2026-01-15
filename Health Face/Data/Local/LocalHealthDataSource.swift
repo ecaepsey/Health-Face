@@ -18,20 +18,25 @@ public class LocalHealthDataSource: HealthDataSource {
         
     }
     
+    
+    
    
     
-    public func fetchHealth(for city: String, completion: @escaping (Result<[HealthEntry], Error>) -> Void) {
-       
-        if let data = jsonLoader.loadJSON(filename: "health_entries.json") {
-            do {
-                let health = try JSONDecoder().decode([HealthEntry].self, from: data)
-                print(health)
-                completion(.success(health))
-            } catch {
-                completion(.failure(error))
-            }
-        } else {
-            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to load local data"])))
+    public func fetchHealth(for city: String) async throws -> [HealthEntry] {
+        guard let data = jsonLoader.loadJSON(filename: "health_entries.json") else {
+            throw NSError(
+                domain: "",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "Failed to load local data"]
+            )
+        }
+
+        do {
+            let health = try JSONDecoder().decode([HealthEntry].self, from: data)
+            print(health)
+            return health
+        } catch {
+            throw error
         }
     }
 }

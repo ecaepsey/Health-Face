@@ -9,7 +9,7 @@ import Foundation
 
 
 // Storage
-final class StorageService<T: Codable> {
+public final class StorageService<T: Codable> {
     private let fileName: String
     
     init(fileName: String) {

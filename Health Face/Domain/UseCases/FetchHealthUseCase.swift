@@ -13,7 +13,7 @@ public class FetchHealthUseCase {
         self.repository = repository
     }
     
-    public func execute(city: String, completion: @escaping (Result<[HealthEntry], Error>) -> Void) {
-        repository.fetchHealth(for: city, completion: completion)
+    public func fetchHealth(for city: String) async throws -> [HealthEntry] {
+        try await repository.fetchHealth(for: city)
     }
 }

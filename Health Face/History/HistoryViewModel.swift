@@ -30,18 +30,26 @@ final class HistoryViewModel: ObservableObject {
 //    }
 //    
     public func fetchHealth(for city: String) {
-        fetchHealhUseCase.execute(city: city) { [weak self] result in
-              switch result {
-              case .success(let forecast):
-                  DispatchQueue.main.async {
-                      self?.entries = forecast
-                  }
-              case .failure(let error):
-                  DispatchQueue.main.async {
-//                      self?.errorMessage = error.localizedDescription
-                  }
-              }
-          }
+        Task  {
+            do {
+                let health = try await fetchHealhUseCase.fetchHealth(for: city)
+                
+                self.entries = health
+            }
+        }
+        
+//        fetchHealhUseCase.execute(city: city) { [weak self] result in
+//              switch result {
+//              case .success(let forecast):
+//                  DispatchQueue.main.async {
+//                      self?.entries = forecast
+//                  }
+//              case .failure(let error):
+//                  DispatchQueue.main.async {
+////                      self?.errorMessage = error.localizedDescription
+//                  }
+//              }
+//          }
       }
     
     

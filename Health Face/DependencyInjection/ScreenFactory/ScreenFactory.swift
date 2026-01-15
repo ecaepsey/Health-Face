@@ -19,7 +19,7 @@ final class ScreenFactory: HomeCoordinatorFactory, HistoryCoordinatorFactory, Au
        
                
         let view = CameraView(newEntryVM: NewEntryViewModel())
-               return view
+        return view
     }
     
 

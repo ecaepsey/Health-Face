@@ -9,11 +9,11 @@ import Foundation
 
 
 public protocol HealthRepository {
-    func fetchHealth(for city: String, completion: @escaping (Result<[HealthEntry], Error>) -> Void)
+     func fetchHealth(for city: String) async throws -> [HealthEntry]
 }
 
 public protocol HealthDataSource {
-    func fetchHealth(for city: String, completion: @escaping (Result<[HealthEntry], Error>) -> Void)
+     func fetchHealth(for city: String) async throws -> [HealthEntry]
 }
 
 

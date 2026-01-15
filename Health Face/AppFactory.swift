@@ -16,7 +16,8 @@ final class AppFactory {
        )
     private lazy var healthRepository: HealthRepositoryImpl = {
         let localDataSource = LocalHealthDataSource(jsonLoader: JSONLoader())
-        return HealthRepositoryImpl(dataSource: localDataSource)
+        let storage = StorageService<HealthEntry>(fileName: "health_entries.json")
+        return HealthRepositoryImpl(dataSource: localDataSource, storageServce: storage)
     }()
 }
 
