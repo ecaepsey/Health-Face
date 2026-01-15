@@ -18,8 +18,20 @@ public class LocalHealthDataSource: HealthDataSource {
         
     }
     
+    private var fileURL: URL {
+        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return dir.appendingPathComponent("health_entries.json")
+    }
     
-    
+  
+    public func save(_ items: [HealthEntry]) {
+        do {
+            let data = try JSONEncoder().encode(items)
+            try data.write(to: fileURL, options: .atomic)
+        } catch {
+            print("Error saving:", error)
+        }
+    }
    
     
     public func fetchHealth(for city: String) async throws -> [HealthEntry] {

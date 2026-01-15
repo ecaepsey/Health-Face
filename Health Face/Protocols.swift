@@ -10,10 +10,13 @@ import Foundation
 
 public protocol HealthRepository {
      func fetchHealth(for city: String) async throws -> [HealthEntry]
+    func save(_ items: [HealthEntry])
+     
 }
 
 public protocol HealthDataSource {
      func fetchHealth(for city: String) async throws -> [HealthEntry]
+    func save(_ items: [HealthEntry])
 }
 
 

@@ -11,25 +11,25 @@ import SwiftUI
 
 struct CheckListScreen: View {
     
-    @ObservedObject var viewModel: NewEntryViewModel
+    @ObservedObject var viewModel: CameraViewModel
     var body: some View {
-        let sleep = String(describing: viewModel.sleep)
-        let puffiness = String(describing: viewModel.puffiness)
+        let sleep = String(describing: viewModel.state.sleep)
+        let puffiness = String(describing: viewModel.state.puffiness)
         VStack {
-            Stepper(LocalizedStringKey("CheckListScreen.sleep.text".localized(with: [sleep])), value: $viewModel.sleep, in: 0...10)
-            Stepper(LocalizedStringKey("CheckListScreen.hydration.text".localized(with: [puffiness])), value: $viewModel.puffiness, in: 0...10)
-            TextField(LocalizedStringKey("CheckListScreen.skin.text"), text: $viewModel.skinCondition)
+            Stepper(LocalizedStringKey("CheckListScreen.sleep.text".localized(with: [sleep])), value: $viewModel.state.sleep, in: 0...10)
+            Stepper(LocalizedStringKey("CheckListScreen.hydration.text".localized(with: [puffiness])), value: $viewModel.state.puffiness, in: 0...10)
+            TextField(LocalizedStringKey("CheckListScreen.skin.text"), text: $viewModel.state.skinCondition)
                 .padding(10)
                                .overlay(
                                    RoundedRectangle(cornerRadius: 7)
                                     .stroke(.secondary.opacity(0.5), lineWidth: 0.5))
-            TextField(LocalizedStringKey("CheckListScreen.notes.text"), text: $viewModel.notes)
+            TextField(LocalizedStringKey("CheckListScreen.notes.text"), text: $viewModel.state.notes)
                 .padding(10)
                                .overlay(
                                    RoundedRectangle(cornerRadius: 7)
                                     .stroke(.secondary.opacity(0.5), lineWidth: 0.5))
             Button {
-                viewModel.save()
+                viewModel.handle(.save)
             } label: {
                 Text(LocalizedStringKey("CheckListScreen.saveNotes.text"))
                     .font(.headline)
@@ -59,6 +59,8 @@ struct CheckListScreen: View {
 //                    }
 //                }
     }
+    
+    
 }
 
 

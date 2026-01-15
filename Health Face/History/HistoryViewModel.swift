@@ -33,8 +33,10 @@ final class HistoryViewModel: ObservableObject {
         Task  {
             do {
                 let health = try await fetchHealhUseCase.fetchHealth(for: city)
+                DispatchQueue.main.async {
+                    self.entries = health
+                }
                 
-                self.entries = health
             }
         }
         

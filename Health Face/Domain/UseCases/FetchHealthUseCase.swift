@@ -16,4 +16,8 @@ public class FetchHealthUseCase {
     public func fetchHealth(for city: String) async throws -> [HealthEntry] {
         try await repository.fetchHealth(for: city)
     }
+    
+    func save(_ items: [HealthEntry]) {
+        repository.save(items)
+    }
 }

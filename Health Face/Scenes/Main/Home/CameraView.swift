@@ -8,10 +8,17 @@ struct CameraView: View {
     @State private var alertMessage: String?
     @State private var showAlert = false
 
-    @ObservedObject var newEntryVM: NewEntryViewModel
+    
 
     @State private var showReminderSettings = false
     @State private var showAddRecordSheet = false
+    
+    @StateObject private var viewModel: CameraViewModel
+    
+  
+    init(viewModel: CameraViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         NavigationStack {
@@ -119,7 +126,8 @@ struct CameraView: View {
             // ✅ Camera sheet
             .sheet(isPresented: $showCamera, onDismiss: {
                 if let image {
-                    newEntryVM.setImage(image) // кладём фото в VM
+                    viewModel.handle(.saveImage(image))
+//                    newEntryVM.setImage(image) // кладём фото в VM
                     // не открываем форму автоматически — лучше дать пользователю кнопку
                 }
             }) {
@@ -133,14 +141,15 @@ struct CameraView: View {
             .sheet(isPresented: $showAddRecordSheet) {
                 // Тут ты можешь показать свой экран формы
                 // Важно: на Save -> сохранить entry и закрыть sheet
-                CheckListScreen(viewModel: newEntryVM)
+                CheckListScreen(viewModel: viewModel)
                     .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.visible)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
                             Button(LocalizedStringKey("Dashboard.saveButton.title")) {
+                                viewModel.handle(.save)
                                 // ⚠️ замени на свой метод сохранения записи
-                                newEntryVM.save()
+//                                newEntryVM.save()
 
                                 showAddRecordSheet = false
                                 image = nil

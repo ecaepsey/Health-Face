@@ -18,7 +18,7 @@ final class ScreenFactory: HomeCoordinatorFactory, HistoryCoordinatorFactory, Au
     func makeHomeView(coordinator: any HomeCoordinatorProtocol) -> CameraView  {
        
                
-        let view = CameraView(newEntryVM: NewEntryViewModel())
+        let view = CameraView(viewModel: CameraViewModel(healthUseCase: appFactory.makeFetchHealthUseCase()))
         return view
     }
     
