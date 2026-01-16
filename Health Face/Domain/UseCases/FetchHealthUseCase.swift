@@ -17,7 +17,7 @@ public class FetchHealthUseCase {
         try await repository.fetchHealth(for: city)
     }
     
-    func save(_ items: [HealthEntry]) {
-        repository.save(items)
+    func save(_ items: [HealthEntry], _ id: String) {
+        repository.save(items, id)
     }
 }

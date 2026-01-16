@@ -39,6 +39,7 @@ struct AppCoordinatorView: View {
             
         case .auth:
             AuthCoordinatorView(
+                
                 AuthCoordinator(showMainSceneHandler: { coordinator.handle(.showMain) }),
                 factory: screenFactory
             )
@@ -46,7 +47,7 @@ struct AppCoordinatorView: View {
         case .main:
             MainCoordinatorView(
                 factory: screenFactory,
-                showAuthSceneHandler: { coordinator.handle(.showMain) }
+                showAuthSceneHandler: { coordinator.handle(.showAuth) }
             )
             
         }

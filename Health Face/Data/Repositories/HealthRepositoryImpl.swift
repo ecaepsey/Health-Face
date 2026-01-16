@@ -22,8 +22,8 @@ public class HealthRepositoryImpl: HealthRepository {
        try await self.dataSource.fetchHealth(for: city)
     }
     
-    public func save(_ items: [HealthEntry]) {
-        self.dataSource.save(items)
+    public func save(_ items: [HealthEntry], _ id: String) {
+        self.dataSource.save(items, id)
     }
     
     

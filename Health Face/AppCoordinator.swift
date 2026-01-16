@@ -46,9 +46,9 @@ final class AppCoordinator: ObservableObject {
       
         case .showMain:
             state = .main
-            
+       
         case .showAuth:
-                    state = .auth
+            state = .auth
         }
         
         
@@ -59,12 +59,13 @@ private extension AppCoordinator {
 
     func loadData() async {
         state = .loading
-
-        do {
-           let token = try await Auth.auth().currentUser?.getIDToken()
+        
+        if Auth.auth().currentUser != nil {
             state = .main
-        } catch {
-            state = . auth
-        }
+            } else {
+                state = .auth
+            }
+        
+        
     }
 }

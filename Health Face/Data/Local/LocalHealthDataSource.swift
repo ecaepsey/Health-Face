@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import FirebaseAuth
 
-
+public enum HealthStorageError: Error {
+    case notLoggedIn
+    case fileNotFound
+    case decodeFailed
+    case encodeFailed
+}
 
 public class LocalHealthDataSource: HealthDataSource {
     private let jsonLoader: JSONLoaderProtocol
@@ -18,38 +24,55 @@ public class LocalHealthDataSource: HealthDataSource {
         
     }
     
-    private var fileURL: URL {
-        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return dir.appendingPathComponent("health_entries.json")
+    func fileURL(uid: String) throws -> URL {
+        try userDir(uid: uid).appendingPathComponent("health_entries.json")
+       
     }
     
+    private func userDir(uid: String) throws -> URL {
+            let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let dir = docs.appendingPathComponent("users/\(uid)", isDirectory: true)
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+            return dir
+        }
+    
   
-    public func save(_ items: [HealthEntry]) {
+    public func save(_ items: [HealthEntry], _ id: String) {
         do {
             let data = try JSONEncoder().encode(items)
-            try data.write(to: fileURL, options: .atomic)
+            let url = try fileURL(uid: id)
+            try data.write(to: url, options: .atomic)
         } catch {
             print("Error saving:", error)
         }
     }
-   
+    private func currentUID() throws -> String {
+           guard let uid = Auth.auth().currentUser?.uid else {
+               throw HealthStorageError.notLoggedIn
+           }
+           return uid
+       }
     
+   
+   
+    private let fm: FileManager = .default
+    private let decoder = JSONDecoder()
     public func fetchHealth(for city: String) async throws -> [HealthEntry] {
-        guard let data = jsonLoader.loadJSON(filename: "health_entries.json") else {
-            throw NSError(
-                domain: "",
-                code: -1,
-                userInfo: [NSLocalizedDescriptionKey: "Failed to load local data"]
-            )
-        }
+        let uid = try currentUID()
+        let url = try fileURL(uid: uid)
 
-        do {
-            let health = try JSONDecoder().decode([HealthEntry].self, from: data)
-            print(health)
-            return health
-        } catch {
-            throw error
-        }
+             guard fm.fileExists(atPath: url.path) else {
+                 // If you prefer: return [] instead of throwing
+                 return []
+                 // throw HealthStorageError.fileNotFound
+             }
+
+             do {
+                 let data = try Data(contentsOf: url)
+                 return try decoder.decode([HealthEntry].self, from: data)
+             } catch {
+                 throw HealthStorageError.decodeFailed
+             }
     }
 }
 

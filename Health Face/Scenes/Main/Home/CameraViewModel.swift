@@ -7,6 +7,7 @@
 
 import CoreImage
 import UIKit
+import FirebaseAuth
 
 final class CameraViewModel: ViewModel {
    
@@ -36,9 +37,9 @@ final class CameraViewModel: ViewModel {
                 state.entries.insert(entry, at: 0)
               
                 
+                let uid = Auth.auth().currentUser!.uid
                 
-                
-                healthUseCase.save(state.entries)
+                healthUseCase.save(state.entries, uid)
                 
             }
             
