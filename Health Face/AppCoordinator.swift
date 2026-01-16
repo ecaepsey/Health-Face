@@ -6,8 +6,7 @@
 //
 
 import Foundation
-
-
+import FirebaseAuth
 
 
 @MainActor
@@ -17,11 +16,13 @@ final class AppCoordinator: ObservableObject {
         case idle
         case auth
         case main
+        case loading
     }
 
     enum Action {
         case showAuth
         case showMain
+        case checkAuthorization
         
     }
 
@@ -40,6 +41,8 @@ final class AppCoordinator: ObservableObject {
 
     func handle(_ action: Action) {
         switch action {
+        case .checkAuthorization:
+            Task { await loadData() }
       
         case .showMain:
             state = .main
@@ -55,13 +58,13 @@ final class AppCoordinator: ObservableObject {
 private extension AppCoordinator {
 
     func loadData() async {
-        state = .auth
+        state = .loading
 
         do {
-           
+           let token = try await Auth.auth().currentUser?.getIDToken()
             state = .main
         } catch {
-            state = .idle
+            state = . auth
         }
     }
 }

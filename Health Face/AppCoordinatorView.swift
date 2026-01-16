@@ -23,7 +23,7 @@ struct AppCoordinatorView: View {
     var body: some View {
         sceneView
             .onAppear {
-                coordinator.handle(.showAuth)
+                coordinator.handle(.checkAuthorization)
             }
     }
 
@@ -32,23 +32,23 @@ struct AppCoordinatorView: View {
         switch coordinator.state {
         case .idle:
             EmptyView()
-
-//        case .loading:
-//            ProgressView()
-//                .tint(.appAccent)
-//                .backgroundColor()
-
+            
+        case .loading:
+            ProgressView()
+                .tint(.blue)
+            
         case .auth:
-                AuthCoordinatorView(
-                    AuthCoordinator(showMainSceneHandler: { coordinator.handle(.showMain) }),
-                    factory: screenFactory
-                )
-
+            AuthCoordinatorView(
+                AuthCoordinator(showMainSceneHandler: { coordinator.handle(.showMain) }),
+                factory: screenFactory
+            )
+            
         case .main:
             MainCoordinatorView(
                 factory: screenFactory,
                 showAuthSceneHandler: { coordinator.handle(.showMain) }
             )
+            
         }
     }
 }

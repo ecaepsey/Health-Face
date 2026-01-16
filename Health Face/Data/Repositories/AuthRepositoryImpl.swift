@@ -11,6 +11,8 @@ import FirebaseAuth
 final class AuthRepositoryImpl: AuthRepository {
     func logIn(credentials: LoginCredentials) async throws {
         try await Auth.auth().signIn(withEmail: credentials.email, password: credentials.password)
+        
+        
     }
     
     func register(user: UserRegister) async throws {
