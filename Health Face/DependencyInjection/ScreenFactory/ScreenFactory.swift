@@ -7,7 +7,8 @@
 
 import Foundation
 
-final class ScreenFactory: HomeCoordinatorFactory, HistoryCoordinatorFactory, AuthCoordinatorFactory {
+final class ScreenFactory: HomeCoordinatorFactory, HistoryCoordinatorFactory, AuthCoordinatorFactory,
+                           SettingsCoordinatorFactory{
     func makeHistoryView(coordinator: any HistoryCoordinatorProtocol) -> HistoryView {
         let vm = HistoryViewModel(fetchHealhUseCase: appFactory.makeFetchHealthUseCase())
         let view = HistoryView(viewModel: vm)
@@ -55,6 +56,15 @@ extension ScreenFactory: RegistrationViewFactory {
         )
         let view = RegistrationView(viewModel: viewModel)
 
+        return view
+    }
+}
+
+extension ScreenFactory: SettingsViewFactory {
+    func makeScreenView(coordinator: SettingsCoordinatorProtocol) -> SettingsView {
+        let viewModel = SettingsViewModel(coordinator: coordinator)
+        let view = SettingsView(viewModel: viewModel)
+        
         return view
     }
 }

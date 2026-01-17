@@ -25,6 +25,7 @@ struct MainCoordinatorView: View {
     private let factory: ScreenFactory
     private let homeCoordinator: HomeCoordinator
     private let historyCoordinator: HistoryCoordinator
+    private let settingsCoordinator: SettingsCoordinator
  
 
     init(factory: ScreenFactory, showAuthSceneHandler: @escaping () -> Void) {
@@ -32,6 +33,7 @@ struct MainCoordinatorView: View {
 
         homeCoordinator = .init(showAuthSceneHandler: showAuthSceneHandler)
         historyCoordinator = .init()
+        settingsCoordinator = .init(showAuthSceneHandler: showAuthSceneHandler)
      
     }
 
@@ -45,9 +47,15 @@ struct MainCoordinatorView: View {
             
             HistoryCoordinatorView(historyCoordinator, factory: factory)
                 .tabItem {
-                    Label("", systemImage: Constants.houseImage)
+                    Label("", systemImage: Constants.heartImage)
                 }
                 .tag(Tab.home)
+            
+            SettingsCoordinatorView(factory: factory, coordinator: settingsCoordinator)
+                .tabItem {
+                    Label("", systemImage: Constants.person)
+                }
+                .tag(Tab.profile)
 
            
         }

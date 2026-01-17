@@ -17,6 +17,8 @@ public enum HealthStorageError: Error {
 
 public class LocalHealthDataSource: HealthDataSource {
     private let jsonLoader: JSONLoaderProtocol
+    private let fm: FileManager = .default
+    private let decoder = JSONDecoder()
     
     
     public init(jsonLoader: JSONLoaderProtocol) {
@@ -55,8 +57,7 @@ public class LocalHealthDataSource: HealthDataSource {
     
    
    
-    private let fm: FileManager = .default
-    private let decoder = JSONDecoder()
+    
     public func fetchHealth(for city: String) async throws -> [HealthEntry] {
         let uid = try currentUID()
         let url = try fileURL(uid: uid)
