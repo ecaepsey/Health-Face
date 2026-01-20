@@ -9,11 +9,11 @@
 
 - Swift
 - SwiftUI
-- Combine
 - Clean Architecture
 - MVVM-C + ViewState
 - Dependency Injection
 - Swift Async Await
+  
 
 # Compare View
 ![Image1](/Images/image1.png "San Juan Mountains")
