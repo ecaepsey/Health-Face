@@ -12,38 +12,32 @@ struct ReminderView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section(header: Text("Напоминание")) {
-                    Toggle("Ежедневное напоминание", isOn: $viewModel.isEnabled)
-                    
-                    DatePicker(
-                        "Время",
-                        selection: $viewModel.time,
-                        displayedComponents: .hourAndMinute
-                    )
-                    .disabled(!viewModel.isEnabled)
-                }
+        Form {
+            Section(header: Text("Напоминание")) {
+                Toggle("Ежедневное напоминание", isOn: $viewModel.isEnabled)
                 
-                Section(footer: Text("В выбранное время тебе придёт пуш, чтобы сделать фото и обновить прогресс.")) {
-                    EmptyView()
+                DatePicker(
+                    "Время",
+                    selection: $viewModel.time,
+                    displayedComponents: .hourAndMinute
+                )
+                .disabled(!viewModel.isEnabled)
+            }
+            
+            Section(footer: Text("В выбранное время тебе придёт пуш, чтобы сделать фото и обновить прогресс.")) {
+                EmptyView()
+            }
+        }
+        .navigationTitle("Напоминание")
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Готово") {
+                    viewModel.save()
+                    dismiss()
                 }
             }
-            .navigationTitle("Напоминание")
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Готово") {
-                        viewModel.save()
-                        dismiss()
-                    }
-                }
-                
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Отмена") {
-                        dismiss()
-                    }
-                }
-            }
+            
+           
         }
     }
 }
