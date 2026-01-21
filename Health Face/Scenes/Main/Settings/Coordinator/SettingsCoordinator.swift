@@ -10,7 +10,7 @@ import Foundation
 
 final class SettingsCoordinator: Coordinator {
     enum Screen: Routable {
-        
+        case reminder
     }
     
     @Published var navigationPath = [Screen]()

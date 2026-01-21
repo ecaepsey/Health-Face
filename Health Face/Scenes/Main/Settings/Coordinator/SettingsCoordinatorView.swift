@@ -20,6 +20,19 @@ struct SettingsCoordinatorView: View {
     var body: some View {
         NavigationStack(path: $coordinator.navigationPath) {
             factory.makeScreenView(coordinator: coordinator)
+                .navigationDestination(for: SettingsCoordinator.Screen.self) {
+                                  destination($0)
+                              }
+        }
+    }
+    
+    @ViewBuilder
+    private func destination(_ screen: SettingsCoordinator.Screen) -> some View {
+        switch screen {
+        case .reminder:
+            factory.makeReminderView()
+
+       
         }
     }
 }

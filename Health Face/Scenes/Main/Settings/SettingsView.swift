@@ -18,14 +18,12 @@ struct SettingsView: View {
     
     var body: some View {
         VStack {
-            Button("Выйти") {
-                
-              
-                   
+            List {
+                Button("Выйти") {
                     viewModel.handle(.logOutTapped)
-                    
-             
-              
+                }
+                
+                NavigationLink("Настройки", value: SettingsCoordinator.Screen.reminder)
             }
         }
     }

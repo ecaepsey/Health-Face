@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol SettingsCoordinatorFactory: SettingsViewFactory {
-    
+protocol SettingsCoordinatorFactory: SettingsViewFactory, ReminderViewFactory {
+
 }

@@ -9,6 +9,12 @@ import Foundation
 
 final class ScreenFactory: HomeCoordinatorFactory, HistoryCoordinatorFactory, AuthCoordinatorFactory,
                            SettingsCoordinatorFactory{
+    func makeReminderView() -> ReminderView {
+        let view = ReminderView()
+        
+        return view
+    }
+    
     func makeHistoryView(coordinator: any HistoryCoordinatorProtocol) -> HistoryView {
         let vm = HistoryViewModel(fetchHealhUseCase: appFactory.makeFetchHealthUseCase())
         let view = HistoryView(viewModel: vm)
@@ -109,4 +115,9 @@ protocol RegistrationViewFactory {
     func makeRegistrationView(
         coordinator: AuthCoordinatorProtocol
     ) -> RegistrationView
+}
+
+@MainActor
+protocol ReminderViewFactory {
+    func makeReminderView() -> ReminderView
 }
