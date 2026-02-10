@@ -32,6 +32,7 @@ struct ReminderView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Готово") {
+                    
                     viewModel.save()
                     dismiss()
                 }
