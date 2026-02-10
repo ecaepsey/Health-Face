@@ -13,6 +13,7 @@
 - MVVM-C + ViewState
 - Dependency Injection
 - Swift Async Await
+- Firebase Auth
   
 
 # Compare View
